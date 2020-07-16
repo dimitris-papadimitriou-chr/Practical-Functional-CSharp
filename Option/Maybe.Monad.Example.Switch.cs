@@ -22,6 +22,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
     {
         MockEmployeeRepository employees = new MockEmployeeRepository();
         MockClientRepository clients = new MockClientRepository();
+     
         public string GetAssignedClientNameById(int clientId) =>
           clients
             .GetById(clientId)
@@ -41,6 +42,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
                   Some: (employee) => employee.Name,
                   None: () => $" No Employee Found"
                 );
+     
         public string GetAssignedEmployeeNameById1(int clientId) =>
               clients
                 .GetById(clientId)
@@ -52,6 +54,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
                   NoneCase<Employee> { } => "No Employee Found",
                   _ => throw new NotImplementedException()
               };
+     
         public string GetAssignedEmployeeNameById2(int clientId) =>
                  (from client in clients.GetById(clientId)
                   from employee in employees.GetById(client.EmployeeId)
