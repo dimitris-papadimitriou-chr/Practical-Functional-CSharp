@@ -29,7 +29,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
             .Case switch
           {
               SomeCase<Client>(var client) => client.Name,
-              NoneCase<Client> { } => "No Client Found",
+              NoneCase<Client> { } => "error",
               _ => throw new NotImplementedException()
           };
 
@@ -40,7 +40,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
                 .Bind(employees.GetById)
                  .Match(
                   Some: (employee) => employee.Name,
-                  None: () => $" No Employee Found"
+                  None: () => $" error "
                 );
      
         public string GetAssignedEmployeeNameById1(int clientId) =>
@@ -51,7 +51,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
                 .Case switch
               {
                   SomeCase<Employee>(var employee) => employee.Name,
-                  NoneCase<Employee> { } => "No Employee Found",
+                  NoneCase<Employee> { } => "error",
                   _ => throw new NotImplementedException()
               };
      
@@ -62,7 +62,7 @@ namespace PracticalCSharp.Maybe.Monad.Example.Switch
                     .Case switch
                  {
                      SomeCase<Employee>(var employee) => employee.Name,
-                     NoneCase<Employee> { } => "No Employee Found",
+                     NoneCase<Employee> { } => "error",
                      _ => throw new NotImplementedException()
                  };
 
