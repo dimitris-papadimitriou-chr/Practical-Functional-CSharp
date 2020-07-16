@@ -1,0 +1,67 @@
+﻿@model WebApplicationExample.Models.ClientViewModel
+@{
+    Layout = "_Layout";
+}
+
+<style type="text/css">
+
+    .field-validation-error {
+        color: #ff0000;
+    }
+</style>
+<div class="container">
+    <div class="col-md-6 col-md-offset-2">
+        <h1>Client Service</h1>
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClientId)
+                @Html.TextBoxFor(model => model.ClientId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ClientId)
+            </div>
+
+            <button type="button" class="btn btn-success submit">Search</button>
+        }
+
+        <br /><br />
+        <div class="col-md-6  ">
+            <p><b>Assigned employee name :</b></p>
+            <div id="result"></div>
+        </div>
+
+        <div class="alert alert-warning fade">
+            <strong><span class="alert-content"></span></strong>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+            function display(txt) {
+                $('#result').text(txt);
+             }
+
+			$(function(){
+
+
+                $('.submit').click(function () {
+                    var id = $('#ClientId').val();
+
+                    fetch(`@Url.RouteUrl(new{ action= "GetAssignedEmployeeNameById1", controller="Home"})/${id}`,
+                        { method: 'POST' })
+                        .then(response => response.json())
+                        .then((response) => {
+                            display(response);
+                        })
+                        .catch((result) => {
+                            alert(result);
+                        });
+
+				});
+
+			});
+
+    </script>
+}
