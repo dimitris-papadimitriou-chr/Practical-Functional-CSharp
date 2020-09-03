@@ -63,11 +63,6 @@ namespace PracticalCSharp.Either.Monad.Example.Switch
             var assignedEmployee = new Controller().GetAssignedEmployeeNameById1(1);
 
 
-            var r = from x1 in Right(2)
-                    from x2 in Right(3)
-                    select x1 + x2;
-
-            var r1 = Right(2).Bind(x => Right(3).Map(y => x + y));
         }
     }
 }
